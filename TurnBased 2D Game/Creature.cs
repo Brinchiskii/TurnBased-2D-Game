@@ -8,8 +8,17 @@ namespace TurnBased_2D_Game
 {
     class Creature
     {
+        private List<AttackItem> _attackItems;
+        private List<DefenceItem> _defenceItems;
+        
         public string Name { get; set; }
         public int HitPoint { get; set; }
+
+        public Creature()
+        {
+            _attackItems = new List<AttackItem>();
+            _defenceItems = new List<DefenceItem>();
+        }
 
         public int Hit()
         {
