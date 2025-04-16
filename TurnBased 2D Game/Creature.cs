@@ -8,31 +8,60 @@ namespace TurnBased_2D_Game
 {
     class Creature
     {
-        private List<AttackItem> _attackItems;
-        private List<DefenceItem> _defenceItems;
+        private readonly List<AttackItem> _attackItems;
+        private readonly List<DefenceItem> _defenceItems;
         
         public string Name { get; set; }
         public int HitPoint { get; set; }
 
-        public Creature()
+        public Creature(string name, int hitPoint)
         {
+            Name = name;
+            HitPoint = hitPoint;
             _attackItems = new List<AttackItem>();
             _defenceItems = new List<DefenceItem>();
         }
 
         public int Hit()
         {
-            throw new NotImplementedException();
+            if (_attackItems.Count == 0)
+            {
+                return 0;
+            }
+
+            int totalHit = _attackItems.Sum(item => item.Hit);
+            return totalHit;
         }
 
         public void ReceiveHit(int hit)
         {
-            throw new NotImplementedException();
+            int totalDefence = _defenceItems.Sum(item => item.ReduceHitPoint);
+            int finalDamage = Math.Max(0, hit - totalDefence);
+            
+            HitPoint -= finalDamage;
+
+            if (HitPoint < 0)
+            {
+                Console.WriteLine($"{Name} is defeated!");
+            }
         }
 
         public void Loot(WorldObject worldObject)
         {
-            throw new NotImplementedException();
+            if (!worldObject.Lootable)
+            {
+                return;
+            }
+
+            switch (worldObject)
+            {
+                case AttackItem attackItem:
+                    _attackItems.Add(attackItem);
+                    break;
+                case DefenceItem defenceItem:
+                    _defenceItems.Add(defenceItem);
+                    break;
+            }
         }
     }
 }

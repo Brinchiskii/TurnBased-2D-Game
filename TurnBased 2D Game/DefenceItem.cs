@@ -6,9 +6,15 @@ using System.Threading.Tasks;
 
 namespace TurnBased_2D_Game
 {
-    class DefenceItem
+    class DefenceItem : WorldObject
     {
         public string Name { get; set; }
         public int ReduceHitPoint { get; set; }
+        
+        public DefenceItem(string name, bool lootable, bool removable, int reduceHitPoint) : base(name, lootable, removable)
+        {
+            this.Name = name;
+            this.ReduceHitPoint = reduceHitPoint;
+        }
     }
 }
