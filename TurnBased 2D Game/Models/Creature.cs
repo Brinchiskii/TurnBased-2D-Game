@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TurnBased_2D_Game
 {
-    class Creature
+    public class Creature
     {
         private readonly List<AttackItem> _attackItems;
         private readonly List<DefenceItem> _defenceItems;
@@ -14,6 +14,11 @@ namespace TurnBased_2D_Game
         public string Name { get; set; }
         public int HitPoint { get; set; }
 
+        public Creature()
+        {
+            
+        }
+        
         public Creature(string name, int hitPoint)
         {
             Name = name;
@@ -62,6 +67,12 @@ namespace TurnBased_2D_Game
                     _defenceItems.Add(defenceItem);
                     break;
             }
+        }
+
+        public override string ToString()
+        {
+            return
+                $"{nameof(Name)}: {Name}, {nameof(HitPoint)}: {HitPoint}";
         }
     }
 }

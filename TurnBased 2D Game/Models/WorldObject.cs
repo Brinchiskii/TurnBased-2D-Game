@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TurnBased_2D_Game
 {
-    class WorldObject
+    public class WorldObject
     {
         public string Name { get; set; }
         public bool Lootable { get; set; }
