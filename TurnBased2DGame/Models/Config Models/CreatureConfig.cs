@@ -1,6 +1,6 @@
 using System.Xml.Serialization;
 
-namespace TurnBased_2D_Game;
+namespace TurnBased2DGame;
 
 public class CreatureConfig
 {

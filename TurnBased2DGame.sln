@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35825.156 d17.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurnBased 2D Game", "TurnBased 2D Game\TurnBased 2D Game.csproj", "{F3CAEB28-094B-4910-A88D-8B7FC4BA0C19}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurnBased2DGame", "TurnBased2DGame\TurnBased2DGame.csproj", "{F3CAEB28-094B-4910-A88D-8B7FC4BA0C19}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsoleApp", "TestConsoleApp\TestConsoleApp.csproj", "{8F702466-9683-472B-A9A0-5A672539881F}"
 EndProject

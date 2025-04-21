@@ -1,4 +1,4 @@
-namespace TurnBased_2D_Game;
+namespace TurnBased2DGame;
 
 using System.Xml.Serialization;
 

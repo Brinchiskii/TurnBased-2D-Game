@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TurnBased_2D_Game
+namespace TurnBased2DGame
 {
     public class WorldObject
     {
