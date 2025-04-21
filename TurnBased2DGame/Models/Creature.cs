@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace TurnBased2DGame
 {
+    /// <summary>
+    /// Representing the living creature in the world
+    /// </summary>
     public class Creature
     {
         private readonly List<AttackItem> _attackItems;
@@ -29,6 +32,10 @@ namespace TurnBased2DGame
             _defenceItems = new List<DefenceItem>();
         }
 
+        /// <summary>
+        /// Total hit points this creature can deal from all its attack items.
+        /// </summary>
+        /// <returns>The total attack value</returns>
         public int Hit()
         {
             if (_attackItems.Count == 0)
@@ -40,6 +47,10 @@ namespace TurnBased2DGame
             return totalHit;
         }
 
+        /// <summary>
+        /// The total received hit from an attack
+        /// </summary>
+        /// <param name="hit">The total hit value</param>
         public void ReceiveHit(int hit)
         {
             int totalDefence = _defenceItems.Sum(item => item.ReduceHitPoint);
@@ -55,6 +66,10 @@ namespace TurnBased2DGame
             }
         }
 
+        /// <summary>
+        /// Adds loot to the associated inventory of the creature
+        /// </summary>
+        /// <param name="worldObject">The picked up world object</param>
         public void Loot(WorldObject worldObject)
         {
             if (!worldObject.Lootable)
@@ -77,20 +92,6 @@ namespace TurnBased2DGame
                 default:
                     Logger.Information($"{Name} looted unknown object '{worldObject.Name}'");
                     break;
-            }
-        }
-
-        public void AddDefenceItem(DefenceItem defenceItem)
-        {
-            try
-            {
-                _defenceItems.Add(defenceItem);
-                Logger.Information($"{Name} added DefenceItem '{defenceItem.Name}' to their inventory.");
-            }
-            catch (Exception e)
-            {
-                Logger.Error($"{Name} failed to add DefenceItem '{defenceItem.Name}': {e.Message}");
-                throw;
             }
         }
 

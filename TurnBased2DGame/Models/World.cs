@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace TurnBased2DGame
 {
+    /// <summary>
+    /// Representing the world in the game
+    /// </summary>
     public class World
     {
         private readonly List<Creature> _creatures;
@@ -26,8 +29,16 @@ namespace TurnBased2DGame
             _worldObjects = new List<WorldObject>();
         }
         
+        /// <summary>
+        /// Getting all the creatures in the world
+        /// </summary>
+        /// <returns>A list of all creatures</returns>
         public List<Creature> GetCreatures() => _creatures;
 
+        /// <summary>
+        /// Adds creatures to the world by populating the creature list
+        /// </summary>
+        /// <param name="creature">Creature object which needs to be added to the world</param>
         public void AddCreature(Creature creature)
         {
             try
@@ -42,8 +53,16 @@ namespace TurnBased2DGame
             }
         }
         
+        /// <summary>
+        /// Getting all the world objects in the world
+        /// </summary>
+        /// <returns>A list of all world objects</returns>
         public List<WorldObject> GetWorldObjects() => _worldObjects;
 
+        /// <summary>
+        /// Adds world objects to the world by populating the worldObjects list
+        /// </summary>
+        /// <param name="worldObject">World object which needs to be added to the world</param>
         public void AddWorldObject(WorldObject worldObject)
         {
             try

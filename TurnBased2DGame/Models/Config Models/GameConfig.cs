@@ -2,6 +2,13 @@ using System.Xml.Serialization;
 
 namespace TurnBased2DGame;
 
+/// <summary>
+/// Represents configuration settings for initializing the game world.
+/// </summary>
+/// <remarks>
+/// This class is populated by deserializing XML data from a config file.
+/// It contains general game parameters and lists of initial creatures and objects.
+/// </remarks>
 [XmlRoot("GameConfig")]
 public class GameConfig
 {

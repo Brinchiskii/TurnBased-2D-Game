@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace TurnBased2DGame
 {
+    /// <summary>
+    /// Represents the basic data that should be in every world object
+    /// </summary>
     public class WorldObject
     {
         public string Name { get; set; }

@@ -2,6 +2,9 @@ using System.Xml.Serialization;
 
 namespace TurnBased2DGame;
 
+/// <summary>
+/// Represents an attack item that can be configured in the XML file.
+/// </summary>
 public class AttackItemConfig
 {
     [XmlElement("Name")]

@@ -2,6 +2,9 @@ namespace TurnBased2DGame;
 
 using System.Xml.Serialization;
 
+/// <summary>
+/// Represents a defense item that can be configured in the XML file.
+/// </summary>
 public class DefenceItemConfig
 {
     [XmlElement("Name")]

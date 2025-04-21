@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace TurnBased2DGame
 {
+    /// <summary>
+    /// Representing the attack item in the game world
+    /// </summary>
     class AttackItem : WorldObject
     {
         public string Name { get; set; }
