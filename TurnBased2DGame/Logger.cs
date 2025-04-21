@@ -4,6 +4,13 @@ namespace TurnBased2DGame;
 
 public class Logger
 {
+    public enum LogLevel
+    {
+        Information,
+        Warning,
+        Error
+    }
+    
     static Logger()
     {
         Trace.Listeners.Add(new ConsoleTraceListener());
@@ -11,8 +18,14 @@ public class Logger
         Trace.AutoFlush = true;
     }
 
-    public static void Log(string message)
+    public static void Log(string message, LogLevel level = LogLevel.Information)
     {
-        Trace.WriteLine($"[{DateTime.Now:g}] {message}");
+        string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        string prefix = level.ToString().ToUpper();
+        Trace.WriteLine($"[{timestamp}] [{prefix}] {message}");
     }
+    
+    public static void Information(string message) => Log(message, LogLevel.Information);
+    public static void Warning(string message) => Log(message, LogLevel.Warning);
+    public static void Error(string message) => Log(message, LogLevel.Error);
 }

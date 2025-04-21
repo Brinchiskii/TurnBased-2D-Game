@@ -47,11 +47,11 @@ namespace TurnBased2DGame
             
             HitPoint -= finalDamage;
 
-            Logger.Log($"{Name} received hit, {hit} damage, (after {totalDefence} defence). Remaining HP: {HitPoint}");
+            Logger.Information($"{Name} received hit, {hit} damage, (after {totalDefence} defence). Remaining HP: {HitPoint}");
             
             if (HitPoint < 0)
             {
-                Logger.Log($"{Name} is defeated!");
+                Logger.Information($"{Name} is defeated!");
             }
         }
 
@@ -59,7 +59,7 @@ namespace TurnBased2DGame
         {
             if (!worldObject.Lootable)
             {
-                Logger.Log($"{Name} tried to loot '{worldObject.Name}', but it is not lootable.");
+                Logger.Information($"{Name} tried to loot '{worldObject.Name}', but it is not lootable.");
                 return;
             }
 
@@ -67,23 +67,31 @@ namespace TurnBased2DGame
             {
                 case AttackItem attackItem:
                     _attackItems.Add(attackItem);
-                    Logger.Log($"{Name} looted AttackItem '{attackItem.Name}' (Hit: {attackItem.Hit})");
+                    Logger.Information($"{Name} looted AttackItem '{attackItem.Name}' (Hit: {attackItem.Hit})");
                     break;
                 case DefenceItem defenceItem:
                     _defenceItems.Add(defenceItem);
-                    Logger.Log($"{Name} looted DefenceItem '{defenceItem.Name}' (Defense: {defenceItem.ReduceHitPoint})");
+                    Logger.Information($"{Name} looted DefenceItem '{defenceItem.Name}' (Defense: {defenceItem.ReduceHitPoint})");
                     break;
                 
                 default:
-                    Logger.Log($"{Name} looted unknown object '{worldObject.Name}'");
+                    Logger.Information($"{Name} looted unknown object '{worldObject.Name}'");
                     break;
             }
         }
 
         public void AddDefenceItem(DefenceItem defenceItem)
         {
-            _defenceItems.Add(defenceItem);
-            Logger.Log($"{Name} added DefenceItem '{defenceItem.Name}'");
+            try
+            {
+                _defenceItems.Add(defenceItem);
+                Logger.Information($"{Name} added DefenceItem '{defenceItem.Name}' to their inventory.");
+            }
+            catch (Exception e)
+            {
+                Logger.Error($"{Name} failed to add DefenceItem '{defenceItem.Name}': {e.Message}");
+                throw;
+            }
         }
 
         public override string ToString()

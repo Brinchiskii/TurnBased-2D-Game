@@ -9,8 +9,8 @@ namespace TurnBased2DGame
 {
     public class World
     {
-        private List<Creature> _creatures;
-        private List<WorldObject> _worldObjects;
+        private readonly List<Creature> _creatures;
+        private readonly List<WorldObject> _worldObjects;
         
         public int MaxX { get; set; }
         public int MaxY { get; set; }
@@ -30,16 +30,32 @@ namespace TurnBased2DGame
 
         public void AddCreature(Creature creature)
         {
-            _creatures.Add(creature);
-            Logger.Log($"Creature added({creature.Name}) to world");
+            try
+            {
+                _creatures.Add(creature);
+                Logger.Information($"Creature added({creature.Name}) to world");
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+                throw;
+            }
         }
         
         public List<WorldObject> GetWorldObjects() => _worldObjects;
 
         public void AddWorldObject(WorldObject worldObject)
         {
-            _worldObjects.Add(worldObject);
-            Logger.Log($"WorldObject added({worldObject.Name}) to world");
+            try
+            {
+                _worldObjects.Add(worldObject);
+                Logger.Information($"WorldObject added({worldObject.Name}) to world");
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+                throw;
+            }
         }
     }
 }
