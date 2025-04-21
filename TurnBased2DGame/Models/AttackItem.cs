@@ -12,11 +12,21 @@ namespace TurnBased2DGame
         public int Hit { get; set; }
         public int Range { get; set; }
 
+        public AttackItem() : base()
+        {
+            
+        }
+        
         public AttackItem(string name, bool lootable, bool removable, int hit, int range) : base(name, lootable, removable)
         {
             this.Name = name;
             this.Hit = hit;
             this.Range = range;
+        }
+
+        public override string ToString()
+        {
+            return $"{nameof(Name)}: {Name}, {nameof(Hit)}: {Hit}, {nameof(Range)}: {Range}";
         }
     }
 }

@@ -6,15 +6,24 @@ using System.Threading.Tasks;
 
 namespace TurnBased2DGame
 {
-    class DefenceItem : WorldObject
+    public class DefenceItem : WorldObject
     {
         public string Name { get; set; }
         public int ReduceHitPoint { get; set; }
-        
+
+        public DefenceItem() : base()
+        {
+            
+        }
         public DefenceItem(string name, bool lootable, bool removable, int reduceHitPoint) : base(name, lootable, removable)
         {
             this.Name = name;
             this.ReduceHitPoint = reduceHitPoint;
+        }
+
+        public override string ToString()
+        {
+            return $"{nameof(Name)}: {Name}, {nameof(ReduceHitPoint)}: {ReduceHitPoint}";
         }
     }
 }

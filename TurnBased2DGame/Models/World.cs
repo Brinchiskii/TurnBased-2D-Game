@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,11 +27,19 @@ namespace TurnBased2DGame
         }
         
         public List<Creature> GetCreatures() => _creatures;
-        
-        public void AddCreature(Creature creature) => _creatures.Add(creature);
+
+        public void AddCreature(Creature creature)
+        {
+            _creatures.Add(creature);
+            Logger.Log($"Creature added({creature.Name}) to world");
+        }
         
         public List<WorldObject> GetWorldObjects() => _worldObjects;
-        
-        public void AddWorldObject(WorldObject worldObject) => _worldObjects.Add(worldObject);
+
+        public void AddWorldObject(WorldObject worldObject)
+        {
+            _worldObjects.Add(worldObject);
+            Logger.Log($"WorldObject added({worldObject.Name}) to world");
+        }
     }
 }

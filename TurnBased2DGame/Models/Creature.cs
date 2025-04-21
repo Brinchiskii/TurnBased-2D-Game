@@ -16,13 +16,15 @@ namespace TurnBased2DGame
 
         public Creature()
         {
-            
+            _attackItems = new List<AttackItem>();
+            _defenceItems = new List<DefenceItem>();
         }
         
         public Creature(string name, int hitPoint)
         {
             Name = name;
             HitPoint = hitPoint;
+            
             _attackItems = new List<AttackItem>();
             _defenceItems = new List<DefenceItem>();
         }
@@ -45,9 +47,11 @@ namespace TurnBased2DGame
             
             HitPoint -= finalDamage;
 
+            Logger.Log($"{Name} received hit, {hit} damage, (after {totalDefence} defence). Remaining HP: {HitPoint}");
+            
             if (HitPoint < 0)
             {
-                Console.WriteLine($"{Name} is defeated!");
+                Logger.Log($"{Name} is defeated!");
             }
         }
 
@@ -55,6 +59,7 @@ namespace TurnBased2DGame
         {
             if (!worldObject.Lootable)
             {
+                Logger.Log($"{Name} tried to loot '{worldObject.Name}', but it is not lootable.");
                 return;
             }
 
@@ -62,11 +67,23 @@ namespace TurnBased2DGame
             {
                 case AttackItem attackItem:
                     _attackItems.Add(attackItem);
+                    Logger.Log($"{Name} looted AttackItem '{attackItem.Name}' (Hit: {attackItem.Hit})");
                     break;
                 case DefenceItem defenceItem:
                     _defenceItems.Add(defenceItem);
+                    Logger.Log($"{Name} looted DefenceItem '{defenceItem.Name}' (Defense: {defenceItem.ReduceHitPoint})");
+                    break;
+                
+                default:
+                    Logger.Log($"{Name} looted unknown object '{worldObject.Name}'");
                     break;
             }
+        }
+
+        public void AddDefenceItem(DefenceItem defenceItem)
+        {
+            _defenceItems.Add(defenceItem);
+            Logger.Log($"{Name} added DefenceItem '{defenceItem.Name}'");
         }
 
         public override string ToString()

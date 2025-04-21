@@ -12,11 +12,16 @@ namespace TurnBased2DGame
         public bool Lootable { get; set; }
         public bool Removable { get; set; }
 
+        public WorldObject()
+        {
+            
+        }
+        
         public WorldObject(string name, bool lootable, bool removable)
         {
-            this.Name = name;
-            this.Lootable = lootable;
-            this.Removable = removable;
+            Name = name;
+            Lootable = lootable;
+            Removable = removable;
         }
     }
 }
