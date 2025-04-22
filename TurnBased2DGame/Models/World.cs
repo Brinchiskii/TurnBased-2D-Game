@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TurnBased2DGame.Interfaces;
 
 namespace TurnBased2DGame
 {
@@ -14,17 +15,18 @@ namespace TurnBased2DGame
     {
         private readonly List<Creature> _creatures;
         private readonly List<WorldObject> _worldObjects;
+        private readonly IWorldNotifier? _notifier;
         
         public int MaxX { get; set; }
         public int MaxY { get; set; }
         public string GameLevel { get; set; }
 
-        public World(int maxX, int maxY, string gameLevel)
+        public World(int maxX, int maxY, string gameLevel, IWorldNotifier? notifier = null)
         {
             MaxX = maxX;
             MaxY = maxY;
             GameLevel = gameLevel;
-            
+            _notifier = notifier;
             _creatures = new List<Creature>();
             _worldObjects = new List<WorldObject>();
         }
@@ -43,8 +45,8 @@ namespace TurnBased2DGame
         {
             try
             {
-                _creatures.Add(creature);
-                Logger.Information($"Creature added({creature.Name}) to world");
+                _creatures.Add(creature); 
+                _notifier?.OnWorldAddCreature(creature);
             }
             catch (Exception e)
             {
@@ -67,8 +69,8 @@ namespace TurnBased2DGame
         {
             try
             {
-                _worldObjects.Add(worldObject);
-                Logger.Information($"WorldObject added({worldObject.Name}) to world");
+                _worldObjects.Add(worldObject); 
+                _notifier?.OnWorldAddWorldObject(worldObject);
             }
             catch (Exception e)
             {

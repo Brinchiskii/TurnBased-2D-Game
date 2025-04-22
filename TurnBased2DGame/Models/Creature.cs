@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TurnBased2DGame.Interfaces;
 
 namespace TurnBased2DGame
 {
@@ -13,6 +14,7 @@ namespace TurnBased2DGame
     {
         private readonly List<AttackItem> _attackItems;
         private readonly List<DefenceItem> _defenceItems;
+        private readonly ICreatureNotifier? _notifier;
         
         public string Name { get; set; }
         public int HitPoint { get; set; }
@@ -23,11 +25,11 @@ namespace TurnBased2DGame
             _defenceItems = new List<DefenceItem>();
         }
         
-        public Creature(string name, int hitPoint)
+        public Creature(string name, int hitPoint, ICreatureNotifier? notifier = null)
         {
             Name = name;
             HitPoint = hitPoint;
-            
+            _notifier = notifier;
             _attackItems = new List<AttackItem>();
             _defenceItems = new List<DefenceItem>();
         }
@@ -58,11 +60,11 @@ namespace TurnBased2DGame
             
             HitPoint -= finalDamage;
 
-            Logger.Information($"{Name} received hit, {hit} damage, (after {totalDefence} defence). Remaining HP: {HitPoint}");
+            _notifier?.OnCreatureHit(this, hit, finalDamage);
             
             if (HitPoint < 0)
             {
-                Logger.Information($"{Name} is defeated!");
+                _notifier?.OnCreatureDefeated(this);
             }
         }
 
@@ -74,7 +76,7 @@ namespace TurnBased2DGame
         {
             if (!worldObject.Lootable)
             {
-                Logger.Information($"{Name} tried to loot '{worldObject.Name}', but it is not lootable.");
+                _notifier?.OnCreatureLootingFailed(this, worldObject);
                 return;
             }
 
@@ -82,15 +84,15 @@ namespace TurnBased2DGame
             {
                 case AttackItem attackItem:
                     _attackItems.Add(attackItem);
-                    Logger.Information($"{Name} looted AttackItem '{attackItem.Name}' (Hit: {attackItem.Hit})");
+                    _notifier?.OnCreatureLooting(this, attackItem);
                     break;
                 case DefenceItem defenceItem:
                     _defenceItems.Add(defenceItem);
-                    Logger.Information($"{Name} looted DefenceItem '{defenceItem.Name}' (Defense: {defenceItem.ReduceHitPoint})");
+                    _notifier?.OnCreatureLooting(this, defenceItem);
                     break;
                 
                 default:
-                    Logger.Information($"{Name} looted unknown object '{worldObject.Name}'");
+                    _notifier?.OnCreatureLooting(this, worldObject);
                     break;
             }
         }
