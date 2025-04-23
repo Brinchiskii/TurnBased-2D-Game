@@ -74,7 +74,7 @@ namespace TurnBased2DGame
             }
             catch (Exception e)
             {
-                Logger.Error(e.Message);
+                _notifier?.OnWorldAddWorldObjectFailed(worldObject, e.Message);
                 throw;
             }
         }

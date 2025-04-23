@@ -67,7 +67,43 @@ namespace TurnBased2DGame
                 _notifier?.OnCreatureDefeated(this);
             }
         }
+        
+        /// <summary>
+        /// Adds attack item to the creatures inventory
+        /// </summary>
+        /// <param name="item">The item that needs to be added</param>
+        public void AddAttackItem(AttackItem item)
+        {
+            try
+            {
+                _attackItems.Add(item);
+                _notifier?.OnCreatureLooting(this, item);
+            }
+            catch (Exception e)
+            {
+                _notifier?.OnCreatureLootingFailed(this, item);
+                throw;
+            }
+        }
 
+        /// <summary>
+        /// Adds defence item to the creatures inventory
+        /// </summary>
+        /// <param name="item">The item that needs to be added</param>
+        public void AddDefenceItem(DefenceItem item)
+        {
+            try
+            {
+                _defenceItems.Add(item);
+                _notifier?.OnCreatureLooting(this, item);
+            }
+            catch (Exception e)
+            {
+                _notifier?.OnCreatureLootingFailed(this, item);
+                throw;
+            }
+        }
+        
         /// <summary>
         /// Adds loot to the associated inventory of the creature
         /// </summary>
@@ -80,21 +116,7 @@ namespace TurnBased2DGame
                 return;
             }
 
-            switch (worldObject)
-            {
-                case AttackItem attackItem:
-                    _attackItems.Add(attackItem);
-                    _notifier?.OnCreatureLooting(this, attackItem);
-                    break;
-                case DefenceItem defenceItem:
-                    _defenceItems.Add(defenceItem);
-                    _notifier?.OnCreatureLooting(this, defenceItem);
-                    break;
-                
-                default:
-                    _notifier?.OnCreatureLooting(this, worldObject);
-                    break;
-            }
+            worldObject.Loot(this);
         }
 
         public override string ToString()

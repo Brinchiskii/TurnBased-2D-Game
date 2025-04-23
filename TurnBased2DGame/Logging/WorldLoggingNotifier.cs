@@ -13,4 +13,9 @@ public class WorldLoggingNotifier : IWorldNotifier
     {
         Logger.Information($"WorldObject added({worldObject.Name}) to world");
     }
+
+    public void OnWorldAddWorldObjectFailed(WorldObject worldObject, string errorMessage)
+    {
+        Logger.Warning($"WorldObject added({worldObject.Name}) failed: {errorMessage}");
+    }
 }

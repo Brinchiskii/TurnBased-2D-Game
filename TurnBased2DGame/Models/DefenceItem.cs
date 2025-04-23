@@ -12,6 +12,7 @@ namespace TurnBased2DGame
     public class DefenceItem : WorldObject
     {
         public string Name { get; set; }
+        
         public int ReduceHitPoint { get; set; }
 
         public DefenceItem() : base()
@@ -23,6 +24,16 @@ namespace TurnBased2DGame
             this.Name = name;
             this.ReduceHitPoint = reduceHitPoint;
         }
+        
+        /// <summary>
+        /// Extended method for creature looting a world object
+        /// </summary>
+        /// <param name="creature">The creature that wants to loot the item</param>
+        public override void Loot(Creature creature)
+        {
+            creature.AddDefenceItem(this);
+        }
+
 
         public override string ToString()
         {

@@ -9,9 +9,10 @@ namespace TurnBased2DGame
     /// <summary>
     /// Representing the attack item in the game world
     /// </summary>
-    class AttackItem : WorldObject
+    public class AttackItem : WorldObject
     {
         public string Name { get; set; }
+
         public int Hit { get; set; }
         public int Range { get; set; }
 
@@ -25,6 +26,15 @@ namespace TurnBased2DGame
             this.Name = name;
             this.Hit = hit;
             this.Range = range;
+        }
+
+        /// <summary>
+        /// Extended method for creature looting a world object
+        /// </summary>
+        /// <param name="creature">The creature that wants to loot the item</param>
+        public override void Loot(Creature creature)
+        {
+            creature.AddAttackItem(this);
         }
 
         public override string ToString()
