@@ -78,5 +78,10 @@ namespace TurnBased2DGame
                 throw;
             }
         }
+
+        public Creature? CreaturesMeet(int x, int y, Creature creature)
+        {
+            return _creatures.FirstOrDefault(c => c != creature && c.X == x && c.Y == y);
+        }
     }
 }

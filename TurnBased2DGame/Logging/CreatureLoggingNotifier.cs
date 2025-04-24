@@ -22,4 +22,24 @@ public class CreatureLoggingNotifier : ICreatureNotifier
     {
         Logger.Information($"{creature.Name} looted {worldObject.GetType()} '{worldObject.Name}'");
     }
+
+    public void OnCreaturePreparingTurn(Creature creature)
+    {
+        Logger.Information($"{creature.Name} is preparing turn...");
+    }
+
+    public void OnCreatureEndingTurn(Creature creature)
+    {
+        Logger.Information($"{creature.Name} ends turn...");
+    }
+
+    public void OnCreatureMoved(Creature creature)
+    {
+        Logger.Information($"{creature.Name} moves to position ({creature.X}, {creature.Y}).");
+    }
+
+    public void OnCreatureAttack(Creature creature, Creature target, int damage)
+    {
+        Logger.Information($"{creature.Name} attacked {target.Name} for {damage} damage.");
+    }
 }

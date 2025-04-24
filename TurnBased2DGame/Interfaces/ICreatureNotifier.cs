@@ -32,4 +32,20 @@ public interface ICreatureNotifier
     /// <param name="creature">The creature that loots the item</param>
     /// <param name="worldObject">The item that is looted</param>
     void OnCreatureLooting(Creature creature, WorldObject worldObject);
+    
+    /// <summary>
+    /// Called when creature preparing for its turn
+    /// </summary>
+    /// <param name="creature">The creature that prepares</param>
+    void OnCreaturePreparingTurn(Creature creature);
+    
+    /// <summary>
+    /// Called when creature ends its turn
+    /// </summary>
+    /// <param name="creature">The creature that ends its turn</param>
+    void OnCreatureEndingTurn(Creature creature);
+    
+    void OnCreatureMoved(Creature creature);
+    
+    void OnCreatureAttack(Creature creature, Creature target, int damage);
 }
